@@ -1,0 +1,23 @@
+name: Auto Commit & Push
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"  # Runs every 10 minutes
+  push:
+    branches:
+      - main
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Auto Commit
+        run: |
+          git config --global user.name "YourGitHubUsername"
+          git config --global user.email "your-email@example.com"
+          git add .
+          git commit -m "Automated commit"
+          git push
